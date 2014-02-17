@@ -30,7 +30,8 @@ class App:
         self.window.set_icon_name('lunar-calendar')
         app.add_window(self.window)
 
-        self.lunar = LunarCalendar()
+        solarHolidays, lunarHolidays = Config.load_holidays()
+        self.lunar = LunarCalendar(solarHolidays, lunarHolidays)
 
         self.cal = Gtk.Calendar.new()
         self.cal.props.show_day_names = True

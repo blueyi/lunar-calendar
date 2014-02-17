@@ -149,81 +149,6 @@ class LunarCalendar:
     sectionalTermNames = (
         '',     '小寒', '立春', '惊蛰', '清明', '立夏', '芒种', '小暑',
         '立秋', '白露', '寒露', '立冬', '大雪')
-    # 公历中定义的节日
-    # 以`d'开头, 表示根据月份日期来计算, 后面的数字表示月份和日期
-    # 以`w'开头的, 表示某个月的第几周, 比如w0520表示:
-    # 第(05)月第(2)周的星期日(0), 0-6表示周日到周六
-    # 以`y'开头的, 表示本年的第多少天, 后面有3位数字,  比如y256表示第256天.
-    solarHolidays = {
-        'd0101': '元旦',
-        'd0202': '世界湿地日',
-        'd0210': '国际气象节',
-        'd0214': '情人节',
-        'd0303': '全国爱耳日',
-        'd0308': '妇女节',
-        'd0309': '保护母亲河日',
-        'd0312': '植树节',
-        'd0314': '国际警察日',
-        'd0315': '国际消费者权益日',
-        'd0322': '世界水日',
-        'd0401': '愚人节',
-        'd0404': '寒食节', #清明节的前一天'
-        'd0407': '世界卫生日',
-        'd0422': '世界地球日',
-        'd0426': '世界知识产权日',
-        'd0501': '劳动节',
-        'd0503': '世界新闻自由日',
-        'w0520': '母亲节',
-        'd0504': '青年节',
-        'd0507': '世界电信和信息社会日',
-        'd0512': '护士节',
-        'w0530': '全国助残日',
-        'd0531': '世界无烟日',
-        'd0601': '儿童节',
-        'd0605': '世界环境日',
-        'd0606': '全国爱眼日',
-        'w0630': '父亲节',
-        'd0707': '中国人民抗日战争纪念日',
-        'd0711': '世界人口日',
-        'd0801': '建军节',
-        'd0808': '中国爸爸节',
-        'd0812': '国际青年日',
-        'd0903': '抗日战争胜利纪念日',
-        'd0908': '国际扫盲日',
-        'd0910': '教师节',
-        'y256':  '程序员节', # 每年的第256天
-        'd0916': '中国脑健康日',
-        'd0918': '国耻日',
-        'd0919': '国际和平日',
-        'w0936': '国防教育日',
-        'd0920': '全国爱牙日',
-        'd1001': '国庆节',
-        'd1008': '全国高血压日',
-        'd1028': '中国男性键康日',
-        'd1031': '万圣节',
-        'd1109': '消防宣传日',
-        'd1111': '光棍节',
-        'd1201': '世界艾滋病日',
-        'd1205': '国际志愿者日',
-        'd1210': '国际人权日',
-        'd1225': '圣诞节',
-        }
-    lunarHolidays = {
-        'd0101': '春节',
-        'd0115': '元宵节',
-        'd0202': '春龙节',
-        'd0505': '端午节',
-        'd0606': '天贶节',
-        'd0707': '七夕节',
-        'd0715': '中元节',
-        'd0815': '中秋节',
-        'd0909': '重阳节',
-        'd1001': '祭祖节',
-        'd1208': '腊八节',
-        'd1223': '小年',
-        'd1224': '扫房日',
-        'd1230': '除夕'
-        }
 
     # 第一个对应日
     # 公历1901年1月1日, 对应农历4598年11月11日
@@ -235,10 +160,9 @@ class LunarCalendar:
     baseLunarMonth = 11
     baseLunarDay = 11
 
-    def __init__(self, year=1901, month=1, day=1):
-        if year < 1901 or year > 2100:
-            raise ValueError('year is out of range')
-        self.setGregorian(year, month, day)
+    def __init__(self, solarHolidays, lunarHolidays):
+        self.solarHolidays = solarHolidays
+        self.lunarHolidays = lunarHolidays
 
     def __str__(self):
         return ''.join([
@@ -258,6 +182,8 @@ class LunarCalendar:
             ])
 
     def setGregorian(self, year, month, day):
+        if year < 1901 or year > 2100:
+            raise ValueError('year is out of range')
         self.gregorianYear = year
         self.gregorianMonth = month
         self.gregorianDay = day
@@ -299,7 +225,6 @@ class LunarCalendar:
         return self.lunarMonthNames[self.lunarMonth] + '月'
 
     def getLunarDay(self):
-        print('lunar day: ', self.lunarDay)
         return self.lunarDayNames[self.lunarDay]
 
     def getSolarHoliday(self):

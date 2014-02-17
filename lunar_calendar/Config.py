@@ -2,9 +2,11 @@
 # Use of this source code is governed by GPLv3 license that can be found
 # in http://www.gnu.org/licenses/gpl-3.0.html
 
-import os
+import configparser
 import gettext
 import locale
+import os
+import shutil
 
 if __file__.startswith('/usr/local/'):
     PREF = '/usr/local/share'
@@ -27,3 +29,16 @@ AUTHORS = ['LiuLang <gsushzhsosgsu@gmail.com>', ]
 DESCRIPTION = _('A Chinese lunar calendar for linux desktop users')
 
 MENUS_UI = os.path.join(PREF, 'lunar-calendar', 'menus.ui')
+
+HOME_DIR = os.path.expanduser('~')
+CONF_DIR = os.path.join(HOME_DIR, '.config', 'lunar-calendar')
+_default_holiday_file = os.path.join(PREF, 'lunar-calendar', 'holidays.ini')
+_holiday_file = os.path.join(CONF_DIR, 'holidays.ini')
+
+def load_holidays():
+    if not os.path.exists(_holiday_file):
+        os.makedirs(CONF_DIR, exist_ok=True)
+        shutil.copy(_default_holiday_file, _holiday_file)
+    ini = configparser.ConfigParser()
+    ini.read(_holiday_file)
+    return (ini['solarHolidays'], ini['lunarHolidays'])
