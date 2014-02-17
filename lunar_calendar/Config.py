@@ -4,6 +4,7 @@
 
 import os
 import gettext
+import locale
 
 if __file__.startswith('/usr/local/'):
     PREF = '/usr/local/share'
@@ -15,6 +16,8 @@ else:
 LOCALEDIR = os.path.join(PREF, 'locale')
 gettext.bindtextdomain('lunar-calendar', LOCALEDIR)
 gettext.textdomain('lunar-calendar')
+locale.bindtextdomain('lunar-calendar', LOCALEDIR)
+locale.textdomain('lunar-calendar')
 _ = gettext.gettext
 
 APPNAME = _('Lunar Calendar')
