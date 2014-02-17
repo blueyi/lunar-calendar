@@ -13,4 +13,5 @@ share/icons/hicolor/64x64/apps/lunar-calendar.png
 share/icons/hicolor/scalable/apps/lunar-calendar.svg
 share/locale/zh_CN/LC_MESSAGES/lunar-calendar.mo
 share/locale/zh_TW/LC_MESSAGES/lunar-calendar.mo
+share/lunar-calendar/holidays.ini
 share/lunar-calendar/menus.ui

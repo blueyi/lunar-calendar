@@ -23,7 +23,7 @@ locale.textdomain('lunar-calendar')
 _ = gettext.gettext
 
 APPNAME = _('Lunar Calendar')
-VERSION = '1.1'
+VERSION = '1.2'
 HOMEPAGE = 'https://github.com/LiuLang/lunar_calendar'
 AUTHORS = ['LiuLang <gsushzhsosgsu@gmail.com>', ]
 DESCRIPTION = _('A Chinese lunar calendar for linux desktop users')

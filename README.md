@@ -18,6 +18,12 @@ lunar-calendar 可以在linux下显示中国传统的农历.
 * 安装: `# pip3 install lunar-calendar`
 * 升级: `# pip3 install upgrade lunar-calendar`
 
+自定义节日
+=========
+lunar-calendar 可以很方便的加入新的节日, 或者修改默认的节日.
+
+打开 ~/.config/lunar-calendar/holidays.ini 按照里面的说明进行编辑, 保存后,
+重新启动lunar-calendear程序, 就可以使用你刚才编辑好的节日了.
 
 截屏
 ====
