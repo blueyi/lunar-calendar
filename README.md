@@ -8,6 +8,10 @@ lunar-calendar 可以在linux下显示中国传统的农历.
 =====
 python3-gi gtk3的python3绑定
 
+截屏
+====
+<img src="screenshot/lunar-calendar.png?raw=true" title="Lunar Calendar" />
+
 版权
 ====
 依赖GPLv3通用许可协议发布
