@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Lunar Calendar
+GenericName=Chinese Lunar Calendar
+Comment=Chinese Lunar Calendar
+Name[zh_CN]=农历
+GenericName[zh_CN]=中国农历
+Comment[zh_CN]=中国农历
+Exec=lunar-calendar
+Icon=lunar-calendar
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Utility;GTK;

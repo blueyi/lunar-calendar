@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 
 # Copyright (C) 2013-2014 LiuLang <gsushzhsosgsu@gmail.com>
 # Use of this source code is governed by GPLv3 license that can be found
@@ -8,7 +7,7 @@
 class LunarCalendar:
 
     # 公历中每月的天数, 其中的二月在平年是28天, 闰年是29天 
-    gregorianDays = (31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+    gregorianDays = (0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
     # 十个天干名
     heavenlySterms = (
         '甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸')
@@ -69,6 +68,7 @@ class LunarCalendar:
          6, 14,  19,  25,  33,  36,  38,  41,  44,  52,
         55, 79, 117, 136, 147, 150, 155, 158, 185, 193)
     sectionalTermMap = (
+        (),
         (7,6,6,6,6,6,6,6,6,5,6,6,6,5,5,6,6,5,5,5,5,5,5,5,5,4,5,5),  
         (5,4,5,5,5,4,4,5,5,4,4,4,4,4,4,4,4,3,4,4,4,3,3,4,4,3,3,3),  
         (6,6,6,7,6,6,6,6,5,6,6,6,5,5,6,6,5,5,5,6,5,5,5,5,4,5,5,5,5),
@@ -82,6 +82,7 @@ class LunarCalendar:
         (8,8,8,8,7,8,8,8,7,7,8,8,7,7,7,8,7,7,7,7,6,7,7,7,6,6,7,7,7),
         (7,8,8,8,7,7,8,8,7,7,7,8,7,7,7,7,6,7,7,7,6,6,7,7,6,6,6,7,7))
     sectionalTermYear = (
+        (),
         (13, 49, 85, 117, 149, 185, 201, 250, 250),
         (13, 45, 81, 117, 149, 185, 201, 250, 250),
         (13, 48, 84, 112, 148, 184, 200, 201, 250),
@@ -95,6 +96,7 @@ class LunarCalendar:
         (28, 60, 92, 124, 160, 192, 200, 201, 250),
         (17, 53, 85, 124, 156, 188, 200, 201, 250))
     principleTermMap = (
+        (),
         (21, 21, 21, 21, 21, 20, 21, 21, 21, 20, 20, 21, 21, 20, 20, 20,
          20, 20, 20, 20, 20, 19, 20, 20, 20, 19, 19, 20),
         (20, 19, 19, 20, 20, 19, 19, 19, 19, 19, 19, 19, 19, 18, 19, 19,
@@ -120,6 +122,7 @@ class LunarCalendar:
         (22, 22, 23, 23, 22, 22, 22, 23, 22, 22, 22, 22, 21, 22, 22, 22,
          21, 21, 22, 22, 21, 21, 21, 22, 21, 21, 21, 21, 22))
     principleTermYear = (
+        (),
         (13, 45, 81, 113, 149, 185, 201),     
         (21, 57, 93, 125, 161, 193, 201),     
         (21, 56, 88, 120, 152, 188, 200, 201), 
@@ -133,19 +136,94 @@ class LunarCalendar:
         (16, 44, 80, 112, 148, 180, 200, 201), 
         (17, 53, 88, 120, 156, 188, 200, 201))
     lunarMonthNames = (
-        '正', '二', '三', '四', '五', '六', '七', '八', '九', '十',
+        '', '正', '二', '三', '四', '五', '六', '七', '八', '九', '十',
         '冬', '腊')
     lunarDayNames = (
-        '初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八',
-        '初九', '初十', '十一', '十二', '十三', '十四', '十五', '十六',
-        '十七', '十八', '十九', '廿十', '廿一', '廿二', '廿三', '廿四',
-        '廿五', '廿六', '廿七', '廿八', '廿九', '三十')
+        '',     '初一', '初二', '初三', '初四', '初五', '初六', '初七',
+        '初八', '初九', '初十', '十一', '十二', '十三', '十四', '十五',
+        '十六', '十七', '十八', '十九', '廿十', '廿一', '廿二', '廿三',
+        '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十')
     principleTermNames = (
-        '大寒', '雨水', '春分', '谷雨', '夏满', '夏至', '大暑', '处暑',
-        '秋分', '霜降', '小雪', '冬至')
+        '',     '大寒', '雨水', '春分', '谷雨', '夏满', '夏至', '大暑',
+        '处暑', '秋分', '霜降', '小雪', '冬至')
     sectionalTermNames = (
-        '小寒', '立春', '惊蛰', '清明', '立夏', '芒种', '小暑', '立秋',
-        '白露', '寒露', '立冬', '大雪')
+        '',     '小寒', '立春', '惊蛰', '清明', '立夏', '芒种', '小暑',
+        '立秋', '白露', '寒露', '立冬', '大雪')
+    # 公历中定义的节日
+    # 以`d'开头, 表示根据月份日期来计算, 后面的数字表示月份和日期
+    # 以`w'开头的, 表示某个月的第几周, 比如w0520表示:
+    # 第(05)月第(2)周的星期日(0), 0-6表示周日到周六
+    # 以`y'开头的, 表示本年的第多少天, 后面有3位数字,  比如y256表示第256天.
+    solarHolidays = {
+        'd0101': '元旦',
+        'd0202': '世界湿地日',
+        'd0210': '国际气象节',
+        'd0214': '情人节',
+        'd0303': '全国爱耳日',
+        'd0308': '妇女节',
+        'd0309': '保护母亲河日',
+        'd0312': '植树节',
+        'd0314': '国际警察日',
+        'd0315': '国际消费者权益日',
+        'd0322': '世界水日',
+        'd0401': '愚人节',
+        'd0404': '寒食节', #清明节的前一天'
+        'd0407': '世界卫生日',
+        'd0422': '世界地球日',
+        'd0426': '世界知识产权日',
+        'd0501': '劳动节',
+        'd0503': '世界新闻自由日',
+        'w0520': '母亲节',
+        'd0504': '青年节',
+        'd0507': '世界电信和信息社会日',
+        'd0512': '护士节',
+        'w0530': '全国助残日',
+        'd0531': '世界无烟日',
+        'd0601': '儿童节',
+        'd0605': '世界环境日',
+        'd0606': '全国爱眼日',
+        'w0630': '父亲节',
+        'd0707': '中国人民抗日战争纪念日',
+        'd0711': '世界人口日',
+        'd0801': '建军节',
+        'd0808': '中国爸爸节',
+        'd0812': '国际青年日',
+        'd0903': '抗日战争胜利纪念日',
+        'd0908': '国际扫盲日',
+        'd0910': '教师节',
+        'y256':  '程序员节', # 每年的第256天
+        'd0916': '中国脑健康日',
+        'd0918': '国耻日',
+        'd0919': '国际和平日',
+        'w0936': '国防教育日',
+        'd0920': '全国爱牙日',
+        'd1001': '国庆节',
+        'd1008': '全国高血压日',
+        'd1028': '中国男性键康日',
+        'd1031': '万圣节',
+        'd1109': '消防宣传日',
+        'd1111': '光棍节',
+        'd1201': '世界艾滋病日',
+        'd1205': '国际志愿者日',
+        'd1210': '国际人权日',
+        'd1225': '圣诞节',
+        }
+    lunarHolidays = {
+        'd0101': '春节',
+        'd0115': '元宵节',
+        'd0202': '春龙节',
+        'd0505': '端午节',
+        'd0606': '天贶节',
+        'd0707': '七夕节',
+        'd0715': '中元节',
+        'd0815': '中秋节',
+        'd0909': '重阳节',
+        'd1001': '祭祖节',
+        'd1208': '腊八节',
+        'd1223': '小年',
+        'd1224': '扫房日',
+        'd1230': '除夕'
+        }
 
     # 第一个对应日
     # 公历1901年1月1日, 对应农历4598年11月11日
@@ -185,6 +263,7 @@ class LunarCalendar:
         self.gregorianDay = day
         self.isGregLeap = self.isGregorianLeapYear(year)
         self.dayOfYear = self.getDayOfYear(year, month, day)
+        self.weekOfMonth = self.getWeekOfMonth(year, month, day)
         self.dayOfWeek = self.getDayOfWeek(year, month, day)
         self.lunarYear = 0
         self.lunarMonth = 0
@@ -198,11 +277,57 @@ class LunarCalendar:
         self.calcSolarTerms()
         self.calcStermAndBranch()
 
+    def getCalendar(self):
+        return {
+            'gregorianYear': self.gregorianYear,
+            'gregorianMonth': self.gregorianMonth,
+            'gregorianDay': self.gregorianDay,
+            'isGregLeap': self.isGregLeap,
+            'dayOfYear': self.dayOfYear,
+            'weekOfMonth': self.weekOfMonth,
+            'dayOfWeek': self.dayOfWeek,
+            'lunarYear': self.lunarYear,
+            'lunarMonth': self.getLunarMonth(),
+            'lunarDay': self.getLunarDay(),
+            'stermBranch': self.getStermBranch(),
+            'animalZodiac': self.getAnimalZodiac(),
+            'solarHoliday': self.getSolarHoliday(),
+            'lunarHoliday': self.getLunarHoliday(),
+            }
+
     def getLunarMonth(self):
-        return self.lunarMonthNames[self.lunarMonth - 1] + '月'
+        return self.lunarMonthNames[self.lunarMonth] + '月'
 
     def getLunarDay(self):
+        print('lunar day: ', self.lunarDay)
         return self.lunarDayNames[self.lunarDay]
+
+    def getSolarHoliday(self):
+        '''得到公历中的假日
+
+        一天可能是多个假日.
+        '''
+        w = 'w{0:02}{1}{2}'.format(
+                self.gregorianMonth, self.weekOfMonth, self.dayOfWeek)
+        d = 'd{0:02}{1:02}'.format(self.gregorianMonth, self.gregorianDay)
+        y = 'y{0:03}'.format(self.dayOfYear)
+        result = []
+        if w in self.solarHolidays:
+            result.append(self.solarHolidays[w])
+        if d in self.solarHolidays:
+            result.append(self.solarHolidays[d])
+        if y in self.solarHolidays:
+            result.append(self.solarHolidays[y])
+        if result:
+            return '\n'.join(result)
+        return ''
+
+    def getLunarHoliday(self):
+        '''得到农历中的假日'''
+        d = 'd{0:02}{1:02}'.format(self.lunarMonth, self.lunarDay)
+        if d in self.lunarHolidays:
+            return self.lunarHolidays[d]
+        return ''
 
     def getStermBranch(self):
         '''得到本年的岁名.
@@ -225,9 +350,9 @@ class LunarCalendar:
         如果这一天不是二十四节气中的一天, 就返回''.
         '''
         if self.gregorianDay == self.principleTerm:
-            return self.principleTermNames[self.gregorianMonth- 1]
+            return self.principleTermNames[self.gregorianMonth]
         elif self.gregorianDay == self.sectionalTerm:
-            return self.sectionalTermNames[self.gregorianMonth - 1]
+            return self.sectionalTermNames[self.gregorianMonth]
         else:
             return ''
 
@@ -254,6 +379,10 @@ class LunarCalendar:
             count = count + self.daysInGregorianMonth(year, m)
         return count
 
+    def getWeekOfMonth(self, year, month, day):
+        '''确定某天是本月中的第几周'''
+        return (day - 1) // 7 + 1
+
     def getDayOfWeek(self, year, month, day):
         '''确定某天是周几
 
@@ -272,7 +401,7 @@ class LunarCalendar:
 
     def daysInGregorianMonth(self, year, month):
         '''确定公历中某年的某个月有多少天, 这里会计算闰年的'''
-        days = self.gregorianDays[month - 1]
+        days = self.gregorianDays[month]
         if month == 2 and self.isGregLeap:
             days = days + 1
         return days
@@ -382,9 +511,9 @@ class LunarCalendar:
     def getSectionalTerm(self, year, month):
         index = 0
         ry = year - self.baseYear + 1
-        while ry > self.sectionalTermYear[month - 1][index]:
+        while ry > self.sectionalTermYear[month][index]:
             index = index + 1
-        term = self.sectionalTermMap[month - 1][4 * index + ry % 4]
+        term = self.sectionalTermMap[month][4 * index + ry % 4]
         if ry == 121 and month == 4:
             term = 5
         elif ry == 132 and month == 4:
@@ -396,9 +525,9 @@ class LunarCalendar:
     def getPrincipleTerm(self, year, month):
         index = 0
         ry = year - self.baseYear + 1
-        while ry >= self.principleTermYear[month - 1][index]:
+        while ry >= self.principleTermYear[month][index]:
             index = index + 1
-        term = self.principleTermMap[month - 1][4 * index + ry % 4]
+        term = self.principleTermMap[month][4 * index + ry % 4]
         if ry == 171 and month == 3:
             term = 21
         elif ry == 181 and month == 5:
@@ -408,20 +537,3 @@ class LunarCalendar:
     def calcStermAndBranch(self):
         self.heavenlySterm = (self.lunarYear - 1) % 10
         self.earthlyBranch = (self.lunarYear - 1) % 12
-
-
-def main():
-    year = 2014
-    month = 2
-    day = 17
-    calc = LunarCalendar(year, month, day)
-    calc.calcLunarFields()
-    calc.calcSolarTerms()
-    print(calc)
-    print(calc.getLunarMonth())
-    print(calc.getLunarDay())
-    print(calc.getAnimalZodiac())
-    print(calc.getSolarTerm())
-
-if __name__ == '__main__':
-    main()
